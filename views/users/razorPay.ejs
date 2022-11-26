@@ -1,0 +1,144 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>UI 1</title>
+
+  <link rel="shortcut icon" href="paypal.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/paypal.css" charset="utf-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <div class="paypal">
+
+    <div class="paypal__header">
+      <div class="paypal__logo-wrapper">
+        <img src="/images/razorpay-icon.png" alt="razorPay" class="paypal__logo" style="height:3em;width: 10em;">
+      </div>
+
+      <!-- <div class="paypal__header-info">
+          <span class="paypal__date">25.04.2016</span>
+          <span class="paypal__ref">0f-113</span>
+        </div> -->
+    </div>
+
+    <div class="paypal__subheader-wrapper">
+      <form action="" method="post" id="razorpay-form">
+        <div class="paypal__subheader">
+          <h1 class="paypal__username">Hi <%= loggedUser.name %></h1>
+          <span class="paypal__help-text">you've purchased three (3) items in our store:</span>
+        </div>
+    </div>
+
+    <div class="paypal__cart">
+      <h2 class="paypal__cart-title">Cart:</h2>
+      <% for(var i=0;i < products.length;i++){ %>
+
+      <ul class="paypal__cart-list">
+        <li class="paypal__cart-item">
+          <!-- <span class="paypal__index">1</span> -->
+          <span class="paypal__item-name" name="product"><%= products[i].products.productname %></span>
+          <span class="paypal__item-price" name="price"><%= products[i].products.price %></span>
+        </li>
+
+        <% }%>
+
+       <% if(couponTotal == 0 || couponTotal == undefined){ %>
+        <li class="paypal__cart-item">
+          <span class="paypal__cart-total">Total</span>
+          <span class="paypal__item-price" name="total">Rs.<%=total %></span>
+        </li>
+      <% }else{ %>
+        <li class="paypal__cart-item">
+          <span class="paypal__cart-total">Total</span>
+          <span class="paypal__item-price" name="total">Rs.<%= couponTotal %></span>
+        </li>
+      <% } %>  
+      </ul>
+
+    </div>
+
+
+    <div class="paypal__footer text-center">
+      <!-- <img src="https://i.ibb.co/c8CQvBq/barcode.png" alt="Paypal Barcode" class="paypal__barcode"> -->
+      <button type="submit" class="btn btn-primary btn-lg btn-block" id="rzp-button1">Complete Payment</button>
+    </div>
+    </form>
+  </div>
+
+
+  <script>
+
+    var options = {
+      "key": "rzp_test_KyX1VZVHh9D2jK", // Enter the Key ID generated from the Dashboard
+      "amount": "<%=total %>", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "FASHIONOVA",
+      "description": "Test Transaction",
+      "image": "https://example.com/your_logo",
+      "order_id": "<%=data.id%>", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+      "handler": function (response) {
+        // alert(response.razorpay_payment_id);
+        // alert(response.razorpay_order_id);
+        // alert(response.razorpay_signature);
+
+        verifyPayment(response,'<%=data%>')
+      },
+      "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9999999999"
+      },
+      "notes": {
+        "address": "Razorpay Corporate Office"
+      },
+      "theme": {
+        "color": "#3399cc"
+      }
+    };
+    console.log(options);
+    var rzp1 = new Razorpay(options);
+    document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+
+    function verifyPayment(payment,order){
+      console.log("verify payment call");
+      $.ajax({
+        url:'/razorPay-payment',
+        method:'post',
+        data:{
+          payment,
+          order
+        },
+       success:(response)=>{
+        if(response.razorpay){
+          location.href='/razorpay-success'
+        }else{
+          location.href='/razorpay-cancel'
+        }
+       }
+      })
+    }
+  </script>
+
+  <!-- <span class="inspired-by">
+      Inspired by <a href="https://dribbble.com/shots/2738907-PayPal-Email-Receipt">Vladyslav Tyzun / Awesomed</a>
+    </span> -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
