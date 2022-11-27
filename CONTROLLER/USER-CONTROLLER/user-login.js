@@ -57,6 +57,7 @@ exports.userLogin_post=(req,res)=>{
             loggedUser=response.user.name
             blockUser=response.user.signupStatus
             req.session.user=response.user
+            
             if(req.session.returnTo){
               res.redirect(req.session.returnTo)
             }else{
