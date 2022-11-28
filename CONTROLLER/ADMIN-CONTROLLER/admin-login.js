@@ -11,7 +11,7 @@ const multer=require('multer')
 const fs=require('fs')
 const path=require('path');
 const { log } = require('console');
-const bcrypt=require('bcryptjs')
+const bcrypt=require('bcrypt')
 
 
 var loginError

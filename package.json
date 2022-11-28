@@ -7,7 +7,7 @@
     "start": "nodemon app.js"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "bcrypt": "^5.1.0",
     "bson": "^4.7.0",
     "cookie-parser": "~1.4.4",
     "date-and-time": "^2.4.1",

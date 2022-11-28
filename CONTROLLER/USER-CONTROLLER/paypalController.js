@@ -53,8 +53,8 @@ exports.paypal_post = (req, res) => {
         "payment_method": "paypal"
       },
       "redirect_urls": {
-        "return_url": "http://localhost:3000/paypal-success",
-        "cancel_url": "http://localhost:3000/paypal-cancel"
+        "return_url": "https://fashionova.website/paypal-success",
+        "cancel_url": "https://fashionova.website/paypal-cancel"
       },
       "transactions": [{
         "item_list": {
@@ -135,8 +135,6 @@ function updateOrderStatus() {
         status: 'placed'
       }
     })
-    console.log('orderStatus');
-    console.log(orderStatus);
     resolve()
   })
 }
