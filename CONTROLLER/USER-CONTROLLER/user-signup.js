@@ -9,7 +9,7 @@ const { ObjectId } = require('bson');
 //const userHelpers = require('../helpers/user-helpers');
 const objId=require('mongodb').ObjectId
 const client=require('twilio')(config.accountSID,config.authToken)
-const bcrypt=require('bcrypt')
+const bcrypt=require('bcryptjs')
 const moment=require('moment')
 
 

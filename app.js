@@ -2,7 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+
 var session=require('express-session')
 const mongoClient=require('mongodb').MongoClient
 const {Db}=require('mongodb')
@@ -10,14 +10,12 @@ const db=require('./config/connection')
 const paypal=require('paypal-rest-sdk')
  var adminRouter = require('./routes/admin');
 var usersRouter = require('./routes/users');
-const { Cookie } = require('express-session');
 const { userLogin_get } = require('./CONTROLLER/USER-CONTROLLER/user-login');
 
 var app = express();
 
 
-// view engine setup
-// app.set('views', path.join(__dirname, 'views/users'));
+
 app.set('views', [__dirname + '/views/users', __dirname + '/views/admin-test'])
 app.set('view engine', 'ejs');
 
@@ -32,7 +30,9 @@ app.use('/uploads', express.static('uploads'));
 //session
 app.use(session({
   secret:"Key",
-  cookie:{maxAge:600000}
+  cookie:{maxAge:600000},
+  resave: true,
+    saveUninitialized: true
 }))
 
 
