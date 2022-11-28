@@ -15,8 +15,6 @@ const bcrypt=require('bcrypt')
 
 exports.removeWishlistProduct_post=(req,res)=>{
     try{
-    console.log('wishlist');
-    console.log(req.body);
     if(req.session.user){
        removeWishlistProduct(req.body).then((response)=>{
           res.json(response)

@@ -15,12 +15,16 @@ const bcrypt=require('bcrypt')
 
 
 exports.viewReview_get=async(req,res)=>{
+    try{
     if(req.session.admin){
    let reviews=await getReviews()
    res.render('view-reviews',{reviews})
  }else{
     res.redirect('/admin-login')
  }
+}catch{
+    res.redirect('/404')
+}
 }
 
 

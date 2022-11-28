@@ -25,6 +25,7 @@ const connect = (callback) => {
     });
 };
 
+
 const get = () => {
   if (!_db) {
     throw Error("Database not initialzed");

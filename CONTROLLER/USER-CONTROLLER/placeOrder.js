@@ -19,7 +19,7 @@ let couponTotal
 let changeQty
 
 exports.placeOrder_post = async (req, res) => {
-    
+    try{
     if (req.session.user) {
 
         console.log("CART TOTAL");
@@ -82,6 +82,9 @@ exports.placeOrder_post = async (req, res) => {
            
         }
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 

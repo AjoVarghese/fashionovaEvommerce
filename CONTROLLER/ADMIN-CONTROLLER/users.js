@@ -15,16 +15,17 @@ const bcrypt=require('bcrypt')
 
 
 exports.admin_users_get=(req,res)=>{
+    try{
     if(req.session.admin){
         getAllUsers().then((users)=>{
-            // var status=users.signupStatus
-            console.log(users[1].signupStatus);
-
             res.render('users',{users})
         })
     }else{
         res.redirect('/admin-login')
     }  
+}catch{
+    res.redirect('/404')
+}
 }
 
 function getAllUsers(){

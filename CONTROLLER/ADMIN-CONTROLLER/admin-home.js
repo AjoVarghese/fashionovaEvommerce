@@ -33,6 +33,7 @@ let year=moment().subtract(365,'days').calendar()
 
 
 exports.admin_home_get = async (req, res) => {
+    try{
     let revenue = 0
     let weeklyRevenue=0
     let monthlyRevenue=0
@@ -123,6 +124,9 @@ exports.admin_home_get = async (req, res) => {
     } else {
         res.redirect('/admin-login')
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 

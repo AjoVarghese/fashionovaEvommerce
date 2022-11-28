@@ -15,6 +15,10 @@ const bcrypt=require('bcrypt')
 
 
 exports.admin_logout_get=(req,res)=>{
+    try{
     req.session.admin=false
     res.redirect('/admin-login')
+    }catch{
+        res.redirect('/404')
+    }
 }

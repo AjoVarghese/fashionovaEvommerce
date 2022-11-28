@@ -39,8 +39,6 @@ exports.shop_get=async(req,res)=>{
 function doDisplayProducts(limit,page,startIndex,endIndex){
     return new Promise(async(resolve,reject)=>{
          let result=await db.get().collection(collection.PRODUCT_COLLECTION).find().sort({date:-1}).limit(limit).skip((page-1) * parseInt(limit)).toArray()
-        //var result=await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()
-        //console.log(result);
             resolve(result)
         
         

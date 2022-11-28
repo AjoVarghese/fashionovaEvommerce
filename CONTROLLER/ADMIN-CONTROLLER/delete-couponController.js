@@ -16,12 +16,14 @@ const { resolve } = require('path');
 
 
 exports.deleteCoupon_post=(req,res)=>{
-    console.log("COUPON ID");
-    console.log(req.query.id);
+  try{
     var id=objId(req.query.id)
     doDeleteCoupon(id).then((response)=>{
         res.json(response)
     })
+  }catch{
+    res.redirect('/404')
+  }
    
 }
 

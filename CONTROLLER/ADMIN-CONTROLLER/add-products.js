@@ -26,6 +26,7 @@ const moment=require('moment')
 //---------------------------------------------------addProductGet-----------------------------------------------------------
 
 exports.admin_addProducts_get = (req, res) => {
+    try{
     if (req.session.admin) {
         product.findCategory().then((data) => {
             res.render('add-products', {
@@ -35,6 +36,9 @@ exports.admin_addProducts_get = (req, res) => {
     } else {
         res.redirect('/admin-login')
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 

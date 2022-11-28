@@ -14,6 +14,7 @@ const client = require('twilio')(config.accountSID, config.authToken)
 const bcrypt = require('bcrypt')
 
 exports.addToCart_get = async (req, res) => {
+  try{
   if (req.session.user) {
     if(req.session.user.signupStatus == true){
     userCart = true
@@ -33,29 +34,37 @@ exports.addToCart_get = async (req, res) => {
       status: false
     })
   }
+}catch{
+  res.redirect('/404')
+}
 }
 
 
 exports.increaseQuantity_post = (req, res) => {
+  try{
   if (req.session.user) {
-    console.log("INCREAE QUANTITY");
-    console.log('vvvvvvvvvvvvvvv');
-    console.log(req.query.id);
     increase(req.query.id, req.session.user._id)
   } else {
     res.redirect('/login')
   }
+}catch{
+  res.redirect('/404')
+}
 
 }
 
 
 exports.decreaseQuantity_post = (req, res) => {
+  try{
   if (req.session.user) {
 
     decrease(req.query.id, req.session.user._id)
   } else {
     res.redirect('/login')
   }
+}catch{
+  res.redirect('/404')
+}
 
 }
 

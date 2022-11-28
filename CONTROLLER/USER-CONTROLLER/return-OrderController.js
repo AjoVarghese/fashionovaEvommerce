@@ -91,17 +91,12 @@ function getOrders(orderId,userId){
 
 
 function addToWallet(userId,proId,totalPurchaseAmount,orders){
-    console.log("ORDERs");
-    console.log(orders);
     let historyObj={
         date:moment().format('MMMM Do YYYY, h:mm:ss a'),
         total:totalPurchaseAmount,
         paymentMethod:orders[0].paymentMethod,
        }
     return new Promise(async(resolve,reject)=>{
-                
-                // if(orders[0].paymentMethod != 'COD'){
-                
                 let userWallet=await db.get().collection(collection.WALLET_COLLECTION).findOne({userId:objId(userId)})
                
                 if(userWallet){

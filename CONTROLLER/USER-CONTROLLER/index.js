@@ -22,6 +22,7 @@ var userId
 var userCart
 
 exports.index_get=async(req,res)=>{
+  try{
     var cartCount=0
     var wallet=0   
     try{
@@ -33,7 +34,9 @@ exports.index_get=async(req,res)=>{
   }catch(err){
     res.redirect('/404')
   }
-      
+}catch{
+  res.redirect('/404')
+} 
 }
 
 

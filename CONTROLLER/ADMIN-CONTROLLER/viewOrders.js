@@ -24,9 +24,8 @@ const bcrypt = require('bcrypt')
 
 
 exports.admin_viewOrders_get = (req, res) => {
+    try{
     if (req.session.admin) {
-        console.log('ORDER ID');
-        console.log(req.query.id);
         var id = new objId(req.query.id)
         viewSingleOrder(id).then((orders) => {
             res.render('view-orders', {
@@ -36,17 +35,17 @@ exports.admin_viewOrders_get = (req, res) => {
     } else {
         res.redirect('/admin-login')
     }
+}catch{
+    res.redirect('/404')
 }
-
-
+}
 
 function viewSingleOrder(orderId) {
     return new Promise(async (resolve, reject) => {
         let orders = await db.get().collection(collection.ORDER_COLLECTION).aggregate([{
             $match: {
                 _id: orderId
-            },
-            
+            }, 
         },
     {
         $sort:{_id:-1}

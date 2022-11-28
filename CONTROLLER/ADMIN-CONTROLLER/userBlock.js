@@ -15,9 +15,9 @@ const bcrypt=require('bcrypt')
 
 
 exports.admin_userBlock_get=(req,res)=>{
+    try{
     if(req.session.admin){
         var uId=new objId(req.query.id)
-        console.log(uId);
         updateUser(uId,req.body).then(()=>{
             res.redirect('/users')
         })
@@ -25,6 +25,9 @@ exports.admin_userBlock_get=(req,res)=>{
     else{
         res.redirect('/admin-login')
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 

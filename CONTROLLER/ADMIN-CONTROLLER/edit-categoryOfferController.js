@@ -28,31 +28,33 @@ const {
 
 
 exports.editCategoryOffer_get=(req,res)=>{
+    try{
     if(req.session.admin){
         dogetOffer(req.query.id).then((data)=>{
             res.render('edit-categoryOffer',{data})
         })
-        
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 
 
 exports.editCategoryOffer_post=(req,res)=>{
-    console.log('EDITED Id');
-    console.log(req.query.id);
+    try{
     editOfferCategory(req.query.id,req.body).then(()=>{
         res.redirect('/category-offer')
     })
+}catch{
+    res.redirect('/404')
 }
-
+}
 
 
 function dogetOffer(id){
     return new Promise((resolve,reject)=>{
         db.get().collection(collection.OFFER_COLLECTION).findOne({_id:objId(id)}).then((data)=>{
-            console.log("EDIT OFFER");
-            console.log(data);
             resolve(data)
         })
     })
@@ -72,8 +74,6 @@ function editOfferCategory(id,details){
             }
         }
         ).then((data)=>{
-            console.log("OFFER EDITED");
-            console.log(data);
             resolve(data)
         })
     })

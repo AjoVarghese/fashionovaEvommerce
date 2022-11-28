@@ -18,14 +18,17 @@ const bcrypt=require('bcrypt')
 //-------------------------------------productsGet--------------------------------------------
 
 exports.admin_products_get=(req,res)=>{
+    try{
     if(req.session.admin){
         getAllProducts().then((products)=>{
-              
             res.render('products',{products})
         })
     }else{
         res.redirect('/admin-login')
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 

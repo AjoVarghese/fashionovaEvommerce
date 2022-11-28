@@ -14,11 +14,14 @@ const { response } = require('../../app');
 
 
 exports.orderDelivered_post=(req,res)=>{
-   
+   try{
     var id=new objId(req.query.id)
     deliverOrder(id).then((response)=>{
       res.json(response)
     })
+  }catch{
+    res.redirect('/404')
+  }
 }
 
 

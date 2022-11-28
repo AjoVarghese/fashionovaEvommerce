@@ -23,15 +23,17 @@ exports.addAddress_get=(req,res)=>{
 }
 
 exports.addAdress_post=(req,res)=>{
+    try{
     addAddress(req.body).then((response)=>{
       //res.redirect('/saved-addresses')
       res.json(response)
     })
+}catch{
+    res.redirect('/404')
+}
 }
 
 function addAddress(data){
-    console.log('ffrfrfrf');
-    console.log(data.userId);
   let addressObj={
            id:objId(),
            firstName:data.firstName,

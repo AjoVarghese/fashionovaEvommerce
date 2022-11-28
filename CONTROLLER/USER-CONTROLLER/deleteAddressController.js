@@ -17,7 +17,6 @@ const { response } = require('../../app');
 
 exports.deleteAddress_post=(req,res)=>{
     try{
-    console.log('pppppp');
     if(req.session.user){
         var id=new objId(req.query.id)
         doDeleteAddress(id,req.session.user._id).then((response)=>{

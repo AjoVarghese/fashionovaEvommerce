@@ -14,14 +14,8 @@ const { log } = require('console');
 const bcrypt=require('bcrypt')
 const moment=require('moment')
 
-exports.admin_cancelOrder_post=async(req,res)=>{
-  console.log("ORDER CANCEL");
-  console.log(req.body);
-  
-    // var id=new objId(req.query.id)
-    // let user=await getUser(req.body.user)
-    console.log("DONE");
-    
+exports.admin_cancelOrder_post=async(req,res)=>{ 
+    try{
     let totalPurchaseAmount=await getTotalPurchaseAmount(req.body)
     let orderDetails=await getOrderDetails(req.body)
     cancelOrder(req.body).then(async(response)=>{
@@ -30,6 +24,9 @@ exports.admin_cancelOrder_post=async(req,res)=>{
         addToWallet(req.body,totalPurchaseAmount,orders)
       res.json(response)
     })
+}catch{
+    res.redirect('/404')
+}
 }
 
 

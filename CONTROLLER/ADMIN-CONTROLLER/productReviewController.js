@@ -15,6 +15,7 @@ const bcrypt=require('bcrypt')
 
 
 exports.productReview_get=async(req,res)=>{
+    try{
     if(req.session.admin){
         let id=objId(req.query.id)
         let productReview=await viewProductReview(id)
@@ -22,6 +23,9 @@ exports.productReview_get=async(req,res)=>{
     }else{
         res.redirect('/admin-login')
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 

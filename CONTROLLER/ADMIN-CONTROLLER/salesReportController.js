@@ -20,20 +20,17 @@ const salesRevenue=require('../ADMIN-CONTROLLER/admin-home')
 let revenue=salesRevenue.revenue
 
 exports.salesReport_get=async(req,res)=>{
+    try{
     if(req.session.admin){
         let orders=await getOrders()
-        console.log('orders');
-        console.log(orders);
-        // let users=await getAlUsers()
-
         res.render('salesReport',{orders,revenue:salesRevenue.revenue})
     }else{
         res.redirect('/admin-login')
     }
+}catch{
+    res.redirect('/404')
 }
-
-
-
+}
 
 
 function getOrders(){
@@ -45,14 +42,11 @@ function getOrders(){
                  localField:'userId',
                 foreignField:'_id',
                 as:'users'
-               
             }
         },{
             $unwind:'$users'
         }
         ]).toArray()
-            console.log('USERS');
-            console.log(orders);
             resolve(orders)
       
     })

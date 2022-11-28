@@ -79,7 +79,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
    userlog = req.session.user
    adminlog = req.session.admin 
-  res.render('error',{userlog,adminlog});
+  res.render('404',{userlog,adminlog});
 });
 
 

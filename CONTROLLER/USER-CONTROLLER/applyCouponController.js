@@ -30,10 +30,11 @@ exports.applyCoupon_post = async (req, res) => {
             res.json(response)
         })
     } else {
-        console.log(err,'error occured in apply coupon post');
+        
         res.redirect('/login')
     }
 }catch(err){
+    console.log(err,'error occured in apply coupon post');
     res.redirect('/404')
 }
 
@@ -50,12 +51,6 @@ function getCoupon(data, userId) {
         })
         
         let user = await checkUser(userId, data)
-        console.log("REDEEMED USERS");
-        console.log(user+"THIS IS THE PLACE WHERE OUPO ");
-
-      
-    
-    
         if(user==null){
        
             if (coupon && coupon.couponQuantity > 0 && date_obj <= new Date(coupon.endingDate)) {
@@ -85,15 +80,11 @@ function getCoupon(data, userId) {
         couponUsed:true
        })
     }
-
-    //deleting expired coupon
-    // if(date_obj > expiry){
-    //     deleteCoupon(coupon.couponCode)
-    // }
         couponTotal = 0
     })
 
         }catch(err){
+            res.redirect('/404')
             console.log(err,'error at get coupon function');
         }
 }

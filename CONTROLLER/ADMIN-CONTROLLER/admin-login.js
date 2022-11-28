@@ -19,6 +19,7 @@ var loginError
 
 //-----------------------AdminLoginGet-------------------------------------------------------//
 exports.admin_login_get=(req,res)=>{
+    try{
     if(req.session.admin){
         res.redirect('/admin')
     }
@@ -26,17 +27,20 @@ exports.admin_login_get=(req,res)=>{
         res.render('admin-login',{loginError})
         loginError=false
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 
 
 //-------------------------------AdminLoginPost----------------------------------
 exports.admin_login_post=(req,res)=>{
+    try{
    doLogin(req.body).then((data)=>{
         if(data.status){
             req.session.adminLoggedIn=true
             req.session.admin=true
-            //req.session.admin=data.admin
             res.redirect('/admin')
         }
         else{
@@ -44,16 +48,16 @@ exports.admin_login_post=(req,res)=>{
             res.redirect('/admin-login')
         }   
     })
+}catch{
+    res.redirect('/404')
+}
 }
 
 
 function doLogin(loginData){
     return new Promise(async(resolve,reject)=>{
-
         let response={}
-
         let admin=await db.get().collection(collection.ADMIN_COLLECTION).findOne({email:loginData.email})
-       
         if(admin){
           bcrypt.compare(loginData.password,admin.password).then((result)=>{
            

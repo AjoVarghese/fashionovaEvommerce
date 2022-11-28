@@ -4,15 +4,11 @@ const db = require('../../config/connection')
 const collection = require('../../config/collection')
 const objId = require('mongodb').ObjectId
 const paypal = require('paypal-rest-sdk');
-
 const totalprice = require('../USER-CONTROLLER/placeOrder')
 const cartProducts = require('../USER-CONTROLLER/placeOrder')
 const total = require('../USER-CONTROLLER/cartController')
 let cartTotal=require('../USER-CONTROLLER/applyCouponController')
-
 let orderId = totalprice.placeOrderId
-
-
 
 paypal.configure({
   'mode': 'sandbox', //sandbox or live
@@ -44,7 +40,6 @@ exports.paypal_get = async (req, res) => {
 
 
 
-
 exports.paypal_post = (req, res) => {
   if (req.session.user) {
     const create_payment_json = {
@@ -73,7 +68,6 @@ exports.paypal_post = (req, res) => {
         "description": "Hat for the best team ever"
       }]
     }
-
 
 
 

@@ -131,23 +131,7 @@ function getTotalPrice(userId) {
                     }
                 }
             },
-            // {
-            //     $group: {
-            //         _id: null,
-            //         total: {
-            //             $sum: {
-            //                 $multiply: [{
-            //                     $toInt: '$quantity'
-            //                 }, {
-            //                     $toInt: '$products.price'
-            //                 }]
-            //             }
-            //         }
-            //     }
-            // }
         ]).toArray()
-         console.log('TOTAL PRICE');
-         console.log(totalPrice);
         
          let total=0
 
@@ -168,8 +152,6 @@ function getTotalPrice(userId) {
                 total=parseInt(total) + (parseInt(totalPrice[i].products.offerPrice) * parseInt(totalPrice[i].quantity))
             }
             }
-            console.log("TOTAL PRICE");
-            console.log(total);
             exports.totalPrice=total
             
             resolve(total)
@@ -181,8 +163,6 @@ function getTotalPrice(userId) {
 function getCoupons(){
     return new Promise((resolve,reject)=>{
         db.get().collection(collection.COUPON_COLLECTION).find().toArray().then((data)=>{
-            console.log("ALL COUPONS");
-            console.log(data);
             resolve(data)
         })
     })

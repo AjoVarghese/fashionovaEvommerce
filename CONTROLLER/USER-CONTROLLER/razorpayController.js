@@ -63,6 +63,7 @@ exports.razorPay_get = (req, res) => {
 
 
 exports.razorPay_post=(req,res)=>{
+    try{
     if(req.session.user){
         verifyPayment(req.body).then(()=>{
           changeOrderStatus(totalprice.placeOrderId).then(()=>{
@@ -74,19 +75,30 @@ exports.razorPay_post=(req,res)=>{
             res.json({razorpay:false,errMsg:'Error'})
         })
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 
 exports.razorPaySuccess_get=(req,res)=>{
+    try{
     if(req.session.user){
         res.render('success-page')
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 exports.razorPayCancel_get=(req,res)=>{
+    try{
     if(req.session.user){
         res.render('cancel-page')
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 

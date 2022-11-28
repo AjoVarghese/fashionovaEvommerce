@@ -26,14 +26,14 @@ const {
 
 
 exports.deleteCategoryOffer_post = (req, res) => {
-    console.log('offer id');
-    console.log(req.query.id);
+    try{
     let offerId = new objId(req.query.id)
     deleteCategoryOffer(offerId).then((response) => {
-        console.log("response");
-        console.log(response);
         res.json(response)
     })
+}catch{
+    res.redirect('/404')
+}
 }
 
 
@@ -42,7 +42,6 @@ function deleteCategoryOffer(offerId) {
     db.get().collection(collection.OFFER_COLLECTION).deleteOne({
         _id: offerId
     }).then(() => {
-        console.log("WOrked");
         resolve({
             offerDeleted: true
         })

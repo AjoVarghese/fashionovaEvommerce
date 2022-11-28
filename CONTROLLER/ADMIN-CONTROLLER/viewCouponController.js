@@ -22,12 +22,16 @@ const bcrypt = require('bcrypt')
 
 
 exports.viewCoupon_get=async(req,res)=>{
+    try{
     if(req.session.admin){
         let coupon=await getCoupon()
         res.render('coupons',{coupon})
     }else{
         res.redirect('/admin-login')
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 

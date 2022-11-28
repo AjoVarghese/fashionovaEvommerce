@@ -16,6 +16,7 @@ const bcrypt=require('bcrypt')
 
 
 exports.admin_allOrders_get=  (req,res)=>{
+    try{
     if(req.session.admin){
         let limit =5;
         let page = 1;
@@ -33,6 +34,9 @@ exports.admin_allOrders_get=  (req,res)=>{
     }else{
         res.redirect('/admin-login') 
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 
@@ -40,12 +44,7 @@ function getAllOrders(limit,page,startIndex,endIndex){
    
     return new Promise(async(resolve,reject)=>{
         let count12 =  await db.get().collection(collection.ORDER_COLLECTION).count({})
-        console.log(count12+"THis is the length of orders");
-        
         let orders = await db.get().collection(collection.ORDER_COLLECTION).find({}).sort({time:-1}).limit(limit).skip((page - 1) * parseInt(limit)).toArray()
-        // let orders=await db.get().collection(collection.ORDER_COLLECTION).find().sort({time:1}).toArray()
-       console.log('ALL ORERS');
-       console.log(orders);
         resolve(orders,count12)
     })
 }

@@ -89,51 +89,6 @@ function addReviews(details, userId,product) {
 
 }
 
-// exports.userReviews_post = async (req, res) => {
-//     console.log("REVIEW PRODUCT");
-//     console.log(product);
-//     addReviews(req.session.user,req.body)
-//     let reviewObj = {
-//         userId: req.session.user._id,
-//         reviewerName:req.body.name,
-//         review: req.body.description
-//     }
-
-//     if (req.session.user) {
-//         let reviewExists = await checkProductReview(req.body.productId)
-//         if (reviewExists) {
-//             db.get().collection(collection.REVIEW_COLLECTION).updateOne({
-//                 productId: product._id
-//             }, {
-//                 $push: {
-//                     reviews: reviewObj
-//                 }
-//             }).then((data)=>{
-//                 resolve(data)
-//             })
-//         } else {
-
-//             let productReview = {
-//                 productId: product._id,
-//                 productName: product.productname,
-//                 productImage: product.
-//                 productimage,
-//                 reviews: [reviewObj]
-//             }
-
-//             db.get().collection(collection.REVIEW_COLLECTION).insertOne(productReview)
-//             resolve()
-
-//         }
-//     } else {
-//         res.redirect('/login')
-//     }
-// }
-
-
-
-
-
 
 function getProduct(proId) {
     return new Promise((resolve, reject) => {

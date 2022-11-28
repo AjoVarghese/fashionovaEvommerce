@@ -20,6 +20,7 @@ let newPassword
 let oldPassword
 
 exports.changePassword_get=(req,res)=>{
+    try{
     if(req.session.user){
         res.render('change-password',{userDetails:req.session.user,newPassword,oldPassword,erormsg})
         erormsg="12";
@@ -30,13 +31,15 @@ exports.changePassword_get=(req,res)=>{
         req.session.returnTo = req.originalUrl;
         res.redirect('/login')
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 
 exports.changePassword_post= async (req,res)=>{
+    try{
   if(req.session.user){
-    console.log("change password");
-    console.log(req.body);
     let oldPassword = req.body.oldPassword;
     let newPassword = req.body.newPassword;
     let newPassword1 = await bcrypt.hash(newPassword,10);
@@ -64,33 +67,11 @@ exports.changePassword_post= async (req,res)=>{
             res.redirect("/change-password")
         }
     })
-    
-//   checkOldPassword(req.body,req.session.user).then((response)=>{
-//     console.log("RESPONSE");
-//     console.log(response);
-//     if(response.oldPassword == true){
-//         checkNewPassword(req.body,req.session.user).then((response)=>{
-//            if(response.newPassword){
-//             console.log("Shit");
-//             console.log(response);
-//             newPassword=true
-//             res.redirect('/change-password')
-//            }else{
-//             req.session.user=false
-//             res.redirect('/login')
-//            }
-//         })
-//     }else{
-//         console.log("FAILED");
-//         console.log(response);
-//         oldPassword=true
-//         res.redirect('/change-password')
-//     }
-     
-        
-//   })
   
 }
+    }catch{
+        res.redirect('/404')
+    }
 
 }
 
@@ -133,39 +114,3 @@ function checkNewPassword(data,user){
     })
 }
 
-// function checkOldPassword(data,user){
-//     return new Promise(async(resolve,reject)=>{
-//       let result={}
-//      bcrypt.compare(data.oldPassword,user.password).then((status)=>{
-//       if(status ){
-//           result.oldPassword=true
-//           resolve(result)
-//       }else{
-//           resolve(response)
-//       }
-//      })
-         
-//     })
-//   }
-  
-  
-  
-//   function checkNewPassword(data,user){
-//       return new Promise((resolve,reject)=>{
-//           let value={}
-//           let newPassword=data.newPassword
-//           newPassword=bcrypt.hash(newPassword,10)
-//           if(newPassword == user.password){
-//               value.samePassword = true
-//               resolve(value)
-//           }else{
-//               db.get().collection(collection.USER_COLLECTION).updateOne({_id:objId(user._id)},{
-//                              $set:{
-//                               password:newPassword
-//                            }
-//                          }
-//                          )
-//           }
-  
-//       })
-//   }

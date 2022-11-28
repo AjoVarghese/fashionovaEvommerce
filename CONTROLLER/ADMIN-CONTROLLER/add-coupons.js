@@ -13,11 +13,15 @@ const moment=require('moment')
 
 
 exports.admin_Coupons_get = (req, res) => {
+    try{
     if (req.session.admin) {
         res.render('add-coupon', )
     } else {
         res.redirect('/admin-login')
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 

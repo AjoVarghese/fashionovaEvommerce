@@ -15,12 +15,16 @@ const bcrypt=require('bcrypt')
 
 
 exports.admin_unblockUser_get=(req,res)=>{
+    try{
     if(req.session.admin){
         var uId=new objId(req.query.id)
         unblockUser(uId).then(()=>[
             res.redirect('/users')
         ])
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 

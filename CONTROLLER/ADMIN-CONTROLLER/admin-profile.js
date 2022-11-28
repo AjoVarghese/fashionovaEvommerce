@@ -15,5 +15,9 @@ const bcrypt=require('bcrypt')
 
 
 exports.admin_profile_get=(req,res)=>{
+    try{
     res.render('admin-profile')
+    }catch{
+        res.redirect('/404')
+    }
 }

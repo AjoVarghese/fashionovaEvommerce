@@ -15,6 +15,7 @@ const bcrypt=require('bcrypt')
 
 
 exports.admin_deleteProduct_get=(req,res)=>{
+    try{
     if(req.session.admin){
         var delId=new objId(req.query.id)
         deleteProduct(delId).then((response)=>{
@@ -23,6 +24,9 @@ exports.admin_deleteProduct_get=(req,res)=>{
      }else{
         res.redirect('/admin-login')
      }
+    }catch{
+        res.redirect('/404')
+    }
 }
 
 

@@ -16,6 +16,7 @@ const bcrypt=require('bcrypt')
 
 
 exports.admin_editProduct_get=async(req,res)=>{
+    try{
     if(req.session.admin){
         var uId=new objId(req.query.id)
         let result=await db.get().collection(collection.CATEGORY_COLLECTION).find().toArray()
@@ -24,13 +25,16 @@ exports.admin_editProduct_get=async(req,res)=>{
             res.render('edit-product',{data,result})
         })
         findOneProduct().then((data)=>{
-            image1=data.productimage1,
-            image2=data.productimage2,
-            image3=data.productimage3
+            image1=data.productimage1
+            // image2=data.productimage2,
+            // image3=data.productimage3
         })
     }else{
         res.redirect('/admin-login')
     }  
+}catch{
+    res.redirect('/404')
+}
 }
 
 
@@ -52,6 +56,7 @@ function findEditProducts(uId){
 
 
 exports.admin_editProduct_post=(req,res)=>{
+    try{
     var uId=new objId(req.query.id)
         if(req.file){
             // categoryName = .categoryname
@@ -61,14 +66,14 @@ exports.admin_editProduct_post=(req,res)=>{
                data: fs.readFileSync(path.join(req.file.path)),
                contentType: "image/png",
              },
-             productimage2: {
-                data: fs.readFileSync(path.join(req.file.path)),
-                contentType: "image/png",
-              },
-              productimage3: {
-                data: fs.readFileSync(path.join(req.file.path)),
-                contentType: "image/png",
-              },
+            //  productimage2: {
+            //     data: fs.readFileSync(path.join(req.file.path)),
+            //     contentType: "image/png",
+            //   },
+            //   productimage3: {
+            //     data: fs.readFileSync(path.join(req.file.path)),
+            //     contentType: "image/png",
+            //   },
              productid:req.body.productid,
              quantity : parseInt(req.body.quantity),
             price : parseInt(req.body.price),
@@ -84,8 +89,8 @@ exports.admin_editProduct_post=(req,res)=>{
             const details = {
                 productname : req.body.productname,
                 productimage1:image1,
-                productimage2:image2,
-                productimage3:image3,
+                // productimage2:image2,
+                // productimage3:image3,
                  productid:req.body.productid,
                  quantity : parseInt(req.body.quantity),
                 price : parseInt(req.body.price),
@@ -96,6 +101,9 @@ exports.admin_editProduct_post=(req,res)=>{
             editProducts(uId,details)
         }
         res.redirect('/products')
+    }catch{
+        res.redirect('/404')
+    }
 }
 
 
@@ -108,8 +116,8 @@ function editProducts(uId,data){
                 productname:data.productname,
                 description:data.description,
                 productimage1:data.productimage1,
-                productimage2:data.productimage2,
-                productimage3:data.productimage3,
+                // productimage2:data.productimage2,
+                // productimage3:data.productimage3,
                 quantity:parseInt(data.quantity),
                 price:parseInt(data.price),
                 offerPrice:parseInt(data.offerPrice),

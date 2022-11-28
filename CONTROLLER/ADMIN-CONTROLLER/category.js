@@ -16,21 +16,29 @@ const bcrypt=require('bcrypt')
 
 //----------------------------------addCategoryGet---------------------------------------------
 exports.admin_addCategory_get=(req,res)=>{
+    try{
     if(req.session.admin){
         res.render('add-category')
     }
     else{
         res.redirect('/admin-login')
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 
 //----------------------------------adCategoryPost-----------------------------------------------
 
 exports.admin_addCategory_post=(req,res)=>{
+    try{
     addCategory(req.body).then((data)=>{
         res.redirect('/view-category')
     })
+}catch{
+    res.redirect('/404')
+}
 }
 
 
@@ -47,6 +55,7 @@ function addCategory(category){
 
 //----------------------------------------viewCategoryget----------------------------------
 exports.admin_viewCategory_get=(req,res)=>{
+    try{
     if(req.session.admin){
         getAllCategory().then((viewCategory)=>{
             
@@ -55,6 +64,9 @@ exports.admin_viewCategory_get=(req,res)=>{
     }else{
         res.redirect('/admin-login')
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 
@@ -72,6 +84,7 @@ function getAllCategory(){
  //-----------------------------------------------editCategoryGet--------------------------------------------
 
   exports.admin_editCategory_get=(req,res)=>{
+    try{
     if(req.session.admin){
         var eId=new objId(req.query.id)
         getEditCategory(eId).then((data)=>{
@@ -81,7 +94,11 @@ function getAllCategory(){
     }else{
         res.redirect('/admin-login')
     }
+}catch{
+    res.redirect('/404')
+}
   }
+  
 
 
  function getEditCategory(eId){
@@ -98,10 +115,14 @@ function getAllCategory(){
 //----------------------------------------------------editCategoryPost----------------------------------------
 
 exports.admin_editCategory_post=(req,res)=>{
+    try{
     var eId=new objId(req.query.id)
     editCategory(eId,req.body).then((data)=>{
         res.redirect('/view-category')
     })
+}catch{
+    res.redirect('/404')
+}
 }
 
 
@@ -123,6 +144,7 @@ function editCategory(eId,data){
 
 
 exports.admin_deleteCategory_get=(req,res)=>{
+    try{
     if(req.session.admin){
         var eId=new objId(req.query.id)
         deleteCategory(eId).then((data)=>{
@@ -131,6 +153,9 @@ exports.admin_deleteCategory_get=(req,res)=>{
     }else{
         res.redirect('/admin-login')
     } 
+}catch{
+    res.redirect('/404')
+}
 }
 
 

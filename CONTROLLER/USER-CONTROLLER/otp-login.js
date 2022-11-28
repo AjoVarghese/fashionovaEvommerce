@@ -36,8 +36,7 @@ exports.otpLogin_get=(req,res)=>{
 }
 
 exports.otLogin_post=async(req,res)=>{
-  
-
+    try{
     phonenumber=req.body.mobile
     exports.phonenumber1=phonenumber
    console.log(phonenumber);
@@ -64,5 +63,8 @@ exports.otLogin_post=async(req,res)=>{
     mobileError=true
     res.redirect('/otp-login')
    }
+  }catch{
+    res.redirect('/404')
+  }
   
 }

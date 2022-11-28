@@ -25,6 +25,7 @@ const {
 
 
 exports.categoryOffer_get = async (req, res) => {
+    try{
     if (req.session.admin) {
         let category = await getCategory()
         let newOffer = await getOffers()
@@ -35,13 +36,15 @@ exports.categoryOffer_get = async (req, res) => {
     }else{
         res.redirect('/admin-login')
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 
 
 exports.categoryOffer_post = async (req, res) => {
-    console.log("Added Offer");
-    console.log(req.body);
+    try{
     let coupen = await coupenExist(req.body)
     if (coupen) {
         res.json({
@@ -54,6 +57,9 @@ exports.categoryOffer_post = async (req, res) => {
             status: false
         })
     }  
+}catch{
+    res.redirect('/404')
+}
 }
 
 

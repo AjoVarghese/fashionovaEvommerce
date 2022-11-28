@@ -15,12 +15,16 @@ const { getAddress } = require('../../helpers/user-helpers');
 
 
 exports.allAddresses_get=async(req,res)=>{
+    try{
     if(req.session.user){
         let savedAddress=await getAllAddress(req.session.user._id)
     res.render('all-addresses',{savedAddress})
     }else{
         res.redirect('/login')
     }
+}catch{
+    res.redirect('/404')
+}
 }
 
 
