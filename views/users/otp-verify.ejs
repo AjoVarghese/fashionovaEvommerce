@@ -28,6 +28,7 @@
                 
               </div>
 
+            <!-- <span id="timer">30</span> -->
               <a href="/resend-otp">
                 <p style="color: blue; display: none;" id="resendotp">resend otp</p></a>
                <a > <p style="color: grey;" id="resendotp1">resend otp</p></a>
@@ -37,7 +38,15 @@
               setTimeout(() => {
                 document.getElementById("resendotp").style.display = 'flex';
                 document.getElementById("resendotp1").style.display = 'none';
-              }, 5000);
+                document.getElementById("timer").style.display='none'
+              }, 30000);
+
+              // setInterval(() => {
+              //   let num = document.getElementById("timer").innerHTML
+              //   let newnum = parseInt(num)
+              //   document.getElementById("timer").innerHTML=num-1;
+            
+              // }, 1000);
             
             </script>
             <!-- <div class="otp">
