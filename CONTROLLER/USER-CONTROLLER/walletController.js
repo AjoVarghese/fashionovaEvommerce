@@ -8,10 +8,6 @@ const {
 } = require('bson');
 
 const objId = require('mongodb').ObjectId
-const client = require('twilio')(config.accountSID, config.authToken)
-const bcrypt = require('bcrypt')
-const date = require("date-and-time");
-const moment = require('moment');
 
 
 exports.wallet_get=async(req,res)=>{

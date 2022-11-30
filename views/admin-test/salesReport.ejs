@@ -114,7 +114,7 @@
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="/admin-logout">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
@@ -329,10 +329,13 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="all-products.html">All Products</a></li>
-                <li class="nav-item"> <a class="nav-link" href="add-products.html">Add-Products</a></li>
-                <li class="nav-item"> <a class="nav-link" href="add-category.html">Add Category</a></li>
-                <li class="nav-item"> <a class="nav-link" href="view-category.html">View Category</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/products">All Products</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/add-products">Add-Products</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/add-category">Add Category</a></li>
+                <li class="nav-item"> <a class="nav-link" href="view-category">View Category</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/category-offer">Offers</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/view-reviews">Product Reviews</a></li>
+                
               </ul>
             </div>
           </li>
@@ -345,31 +348,48 @@
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="users.html">All Users</a></li>
+                <li class="nav-item"><a class="nav-link" href="/users">All Users</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="" aria-expanded="false" aria-controls="charts">
+            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
               <i class="icon-bar-graph menu-icon"></i>
               <span class="menu-title">Order Management</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="orders.html">All Orders</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/orders">All Orders</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="" aria-expanded="false" aria-controls="tables">
+            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
               <i class="icon-grid-2 menu-icon"></i>
               <span class="menu-title">Coupons</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="tables">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="coupons.html">Coupons</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/add-coupons">Add Coupons</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/coupons">All Coupons</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+              <i class="icon-grid-2 menu-icon"></i>
+              <span class="menu-title">Sales Report</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/sales-report">Sales Report</a></li>
               </ul>
             </div>
           </li>

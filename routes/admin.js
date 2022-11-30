@@ -113,36 +113,49 @@ router.get('/add-products', addproductController.admin_addProducts_get)
 
 
 //-----------------------------------------------------addProductsPost----------------------------------------------------------------------------//
-var storage = multer.diskStorage({
+// var storage = multer.diskStorage({
 
-    destination: function (req, file, cb) {
-        console.log('ggggggggggggggggggggggggggggggggggg');
-        cb(null, './uploads')
+//     destination: function (req, file, cb) {
+//         console.log('ggggggggggggggggggggggggggggggggggg');
+//         cb(null, './uploads')
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, file.originalname)
+//     }
+// })
+
+const upload = multer({
+    storage: multer.diskStorage({}),
+    fileFilter: (req, file, cb) => {
+      let ext = path.extname(file.originalname);
+      if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png" && ext !== ".webp") {
+        cb(new Error("File type is not supported"), false);
+        return;
+      }
+      cb(null, true);
     },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname)
-    }
-})
+  });
 
-var upload = multer({
-    storage: storage
-})
+// var upload = multer({
+//     storage: storage
+// })
 
-var multipleUpload = upload.fields([{
-    name: 'productimage1',
-    maxcount: 1
-}, {
-    name: 'productimage2',
-    maxcount: 1
-}, {
-    name: 'productimage3',
-    maxcount: 1
-}])
+// var multipleUpload = upload.fields([{
+//     name: 'productimage1',
+//     maxcount: 1
+// }, {
+//     name: 'productimage2',
+//     maxcount: 1
+// }, {
+//     name: 'productimage3',
+//     maxcount: 1
+// }])
 
 
 var images
 
-router.post('/add-products', multipleUpload, addproductController.admin_addProducts_post)
+router.post('/add-products', upload.fields([
+    { name: "image2", maxCount: 1 },{ name: "image3", maxCount: 1 },{ name: "image1", maxCount: 1 }]), addproductController.admin_addProducts_post)
 
 
 
@@ -160,7 +173,8 @@ router.get('/edit-product', editProductController.admin_editProduct_get)
 
 
 //-----------------------------------------------------editProductPost----------------------------------------------------------------------//
-router.post('/edit-product', upload.single("productimage"), editProductController.admin_editProduct_post)
+router.post('/edit-product',  upload.fields([
+    { name: "image2", maxCount: 1 },{ name: "image3", maxCount: 1 },{ name: "image1", maxCount: 1 }]), editProductController.admin_editProduct_post)
 
 
 

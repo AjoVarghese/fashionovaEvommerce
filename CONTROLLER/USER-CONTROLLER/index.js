@@ -6,21 +6,6 @@ const config=require('../../config/config');
 const objId=require('mongodb').ObjectId
 
 
-var loggedUser
-var loginError
-var emailError
-var blockedStatus
-var validate
-var mobileError
-var mobileSignupErr
-var noEmail
-var findEmail
-var phonenumber
-var userSession
-var signupStatus=true
-var userId
-var userCart
-
 exports.index_get=async(req,res)=>{
   try{
     var cartCount=0

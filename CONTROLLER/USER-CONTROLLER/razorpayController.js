@@ -9,10 +9,6 @@ const {
 } = require('bson');
 
 const objId = require('mongodb').ObjectId
-const client = require('twilio')(config.accountSID, config.authToken)
-const bcrypt = require('bcrypt')
-const date = require("date-and-time");
-const paypal = require('paypal-rest-sdk');
 const Razorpay = require('razorpay');
 
 

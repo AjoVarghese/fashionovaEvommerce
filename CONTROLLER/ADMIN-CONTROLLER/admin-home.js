@@ -13,16 +13,12 @@ const {
     objectId
 } = require('bson');
 const objId = require('mongodb').ObjectId
-const multer = require('multer')
-const fs = require('fs')
+
 const path = require('path');
 const {
     log
 } = require('console');
-const bcrypt = require('bcrypt');
-const {
-    resolve
-} = require('path');
+
 
 const moment = require('moment');
 
@@ -170,8 +166,7 @@ function getWeeklyOrders(week) {
         let weeklyOrders=await db.get().collection(collection.ORDER_COLLECTION).find({
             date:{$gte:week}
         }).toArray()
-        resolve(weeklyOrders)
-            
+        resolve(weeklyOrders)     
     })
 }
 

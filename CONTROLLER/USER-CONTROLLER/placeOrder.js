@@ -4,9 +4,7 @@ const db = require('../../config/connection')
 const collection = require('../../config/collection')
 const objId = require('mongodb').ObjectId
 const moment = require('moment');
-const {
-    changeProductQuantity
-} = require('../../helpers/user-helpers');
+
 
 
 const total = require('../USER-CONTROLLER/cartController')
@@ -16,7 +14,6 @@ const couponCode = require('../USER-CONTROLLER/applyCouponController')
 let purchaseAmount
 let couponTotal
 
-let changeQty
 
 exports.placeOrder_post = async (req, res) => {
     try{
@@ -70,13 +67,25 @@ exports.placeOrder_post = async (req, res) => {
                 })
               } else if(req.body.paymentMethod === 'Wallet'){
                 let wallet=await walletPayment(req.session.user._id)
-                if(wallet !=null ){
-                    if(wallet.walletAmount >= total.totalPrice){
+                if(wallet.walletAmount > 0 &&wallet.walletAmount >= total.totalPrice ){
+                   db.get().collection(collection.WALLET_COLLECTION).updateOne({userId:objId(req.session.user._id)},
+                     {
+                        
+                            $inc:{
+                                walletAmount:-total.totalPrice
+                            }
+                        
+                     }
+                   )
                 console.log('Wallet');
                 res.json({
                     wallet:true
                 })
-            }
+            
+            }else{
+                res.json({
+                    noWallet:true
+                })
             }
               }
            

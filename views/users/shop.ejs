@@ -135,7 +135,7 @@
 							</div>
 							<div class="product">
 								<a href="/product-single?id=<%= data[i]._id %>" class="img-prod"><img class="img-fluid"
-										src="data:Image/<%=data[i].productimage1.contentType%>;base64,<%=data[i].productimage1.data.toString('base64')%>"
+										src="<%= data[i].image1 %>"
 										alt="Colorlib Template" style="height: 25em;">
 									<!-- <span class="status">30%</span> -->
 									<div class="overlay"></div>

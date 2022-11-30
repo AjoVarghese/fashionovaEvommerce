@@ -8,10 +8,6 @@ const {
 } = require('bson');
 
 const objId = require('mongodb').ObjectId
-const client = require('twilio')(config.accountSID, config.authToken)
-const bcrypt = require('bcrypt')
-const changeProductQuantity = require('../USER-CONTROLLER/placeOrder');
-const { getAddress } = require('../../helpers/user-helpers');
 
 
 exports.userProfile_get=async(req,res)=>{

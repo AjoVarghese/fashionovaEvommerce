@@ -2,31 +2,20 @@ var express = require('express');
 var router = express.Router();
 const db=require('../../config/connection')
 const collection=require('../../config/collection')
-//const userHelper=require('../helpers/user-helpers');
-//const { render, response } = require('../app');
 const config=require('../../config/config');
 const { ObjectId } = require('bson');
-//const userHelpers = require('../helpers/user-helpers');
-const objId=require('mongodb').ObjectId
-const client=require('twilio')(config.accountSID,config.authToken)
 const bcrypt=require('bcrypt')
 
 
 
 var loggedUser
 var loginError
-var emailError
 var blockedStatus
 var validate
-var mobileError
-var mobileSignupErr
 var noEmail
 var findEmail
-var phonenumber
 var userSession
-var signupStatus=true
-var userId
-var userCart
+
 
 exports.userLogin_get=(req,res)=>{
   try{

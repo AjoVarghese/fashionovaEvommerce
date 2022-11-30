@@ -2,16 +2,12 @@ var express = require('express');
 var router = express.Router();
 const collection=require('../../config/collection')
 const db=require('../../config/connection')
-//const adminHelper=require('../helpers/admin-helpers')
+
 const { render } = require('ejs');
 const { response } = require('express');
 const {objectId}=require('bson');
 const objId=require('mongodb').ObjectId
-const multer=require('multer')
-const fs=require('fs')
-const path=require('path');
-const { log } = require('console');
-const bcrypt=require('bcrypt')
+
 const moment=require('moment')
 
 exports.admin_cancelOrder_post=async(req,res)=>{ 
@@ -77,9 +73,6 @@ function getOrderDetails(data){
               {
                   $match:{_id:objId(data.order)}
               },
-              // {
-              //     $project:{'productDetails':1}
-              // },
               {
                   $unwind:'$productDetails'
               },

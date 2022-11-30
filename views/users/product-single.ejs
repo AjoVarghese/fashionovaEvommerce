@@ -121,7 +121,7 @@
 					<div class="wrapper">
 						<div style="margin-right: 50%;" class="block">
 							<img id="main-image"
-								src="data:Image/<%=data.productimage1.contentType%>;base64,<%=data.productimage1.data.toString('base64')%>"
+								src="<%= data.image1 %>"
 								alt="Image To Zoom" class="block__pic" data-title="" data-help="">
 						</div>
 					</div>
@@ -129,17 +129,17 @@
 					<class="img-fluid" alt="Colorlib Template" style="width: 25em;height:30em;" id="main-image">
 						<div class="multiple_image row">
 							<div class="mt-3">
-								<img src="data:Image/<%=data.productimage1.contentType%>;base64,<%=data.productimage1.data.toString('base64')%>"
+								<img src="<%= data.image1 %>"
 									class="img-fluid" alt="Colorlib Template" style="width: 6em;height:7em;" id="image1"
 									onclick="image1()">
 							</div>
 							<div class="mt-3 " style="margin-left: 10px;">
-								<img src="data:Image/<%=data.productimage2.contentType%>;base64,<%=data.productimage2.data.toString('base64')%>"
+								<img src="<%= data.image2 %>"
 									class="img-fluid" alt="Colorlib Template" style="width: 6em;height:7em;" id="image2"
 									onclick="image2()">
 							</div>
 							<div class="mt-3 " style="margin-left: 10px;">
-								<img src="data:Image/<%=data.productimage3.contentType%>;base64,<%=data.productimage3.data.toString('base64')%>"
+								<img src="<%= data.image3 %>"
 									class="img-fluid" alt="Colorlib Template" style="width: 6em;height:7em;" id="image3"
 									onclick="image3()">
 							</div>
@@ -347,118 +347,7 @@
 	</section>
 
 
-	<section class="ftco-section bg-light">
-		<div class="container">
-			<div class="row justify-content-center mb-3 pb-3">
-				<div class="col-md-12 heading-section text-center ftco-animate">
-					<h2 class="mb-4">Ralated Products</h2>
-					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="product">
-						<a href="#" class="img-prod"><img class="img-fluid" src="images/product-1.jpg"
-								alt="Colorlib Template">
-							<!-- <span class="status">30%</span> -->
-							<div class="overlay"></div>
-						</a>
-						<div class="text py-3 px-3">
-							<h3><a href="#"></a></h3>
-							<div class="d-flex">
-								<div class="pricing">
-									<p class="price"><span class="mr-2 price-dc">$120.00</span><span
-											class="price-sale">$80.00</span></p>
-								</div>
-								<div class="rating">
-									<p class="text-right">
-										<a href="#"><span class="ion-ios-star-outline"></span></a>
-										<a href="#"><span class="ion-ios-star-outline"></span></a>
-										<a href="#"><span class="ion-ios-star-outline"></span></a>
-										<a href="#"><span class="ion-ios-star-outline"></span></a>
-										<a href="#"><span class="ion-ios-star-outline"></span></a>
-									</p>
-								</div>
-							</div>
-							<p class="bottom-area d-flex px-3">
-								<a href="#" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i
-											class="ion-ios-add ml-1"></i></span></a>
-								<a href="#" class="buy-now text-center py-2">Buy now<span><i
-											class="ion-ios-cart ml-1"></i></span></a>
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="product">
-						<a href="#" class="img-prod"><img class="img-fluid" src="images/product-2.jpg"
-								alt="Colorlib Template">
-							<div class="overlay"></div>
-						</a>
-						<div class="text py-3 px-3">
-							<h3><a href="#">Floral Jackquard Pullover</a></h3>
-							<div class="d-flex">
-								<div class="pricing">
-									<p class="price"><span>$120.00</span></p>
-								</div>
-								<div class="rating">
-									<p class="text-right">
-										<a href="#"><span class="ion-ios-star-outline"></span></a>
-										<a href="#"><span class="ion-ios-star-outline"></span></a>
-										<a href="#"><span class="ion-ios-star-outline"></span></a>
-										<a href="#"><span class="ion-ios-star-outline"></span></a>
-										<a href="#"><span class="ion-ios-star-outline"></span></a>
-									</p>
-								</div>
-							</div>
-							<p class="bottom-area d-flex px-3">
-								<a href="#" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i
-											class="ion-ios-add ml-1"></i></span></a>
-								<a href="#" class="buy-now text-center py-2">Buy now<span><i
-											class="ion-ios-cart ml-1"></i></span></a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="product">
-						<a href="#" class="img-prod"><img class="img-fluid" src="images/product-3.jpg"
-								alt="Colorlib Template">
-							<div class="overlay"></div>
-						</a>
-						<div class="text py-3 px-3">
-							<h3><a href="#">Floral Jackquard Pullover</a></h3>
-							<div class="d-flex">
-								<div class="pricing">
-									<p class="price"><span>$120.00</span></p>
-								</div>
-								<div class="rating">
-									<p class="text-right">
-										<a href="#"><span class="ion-ios-star-outline"></span></a>
-										<a href="#"><span class="ion-ios-star-outline"></span></a>
-										<a href="#"><span class="ion-ios-star-outline"></span></a>
-										<a href="#"><span class="ion-ios-star-outline"></span></a>
-										<a href="#"><span class="ion-ios-star-outline"></span></a>
-									</p>
-								</div>
-							</div>
-							<p class="bottom-area d-flex px-3">
-								<a href="#" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i
-											class="ion-ios-add ml-1"></i></span></a>
-								<a href="#" class="buy-now text-center py-2">Buy now<span><i
-											class="ion-ios-cart ml-1"></i></span></a>
-							</p>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-	</section>
+	
 
 	<footer class="ftco-footer bg-light ftco-section">
 		<div class="container">

@@ -2,20 +2,12 @@ var express = require('express');
 var router = express.Router();
 const db = require('../../config/connection')
 const collection = require('../../config/collection')
-//const userHelper=require('../helpers/user-helpers');
-//const { render, response } = require('../app');
 const config = require('../../config/config');
 const moment=require('moment')
 const {
     ObjectId
 } = require('bson');
-//const userHelpers = require('../helpers/user-helpers');
 const objId = require('mongodb').ObjectId
-const client = require('twilio')(config.accountSID, config.authToken)
-const bcrypt = require('bcrypt');
-const {
-    getCartProducts
-} = require('../../helpers/user-helpers');
 
 let product
 

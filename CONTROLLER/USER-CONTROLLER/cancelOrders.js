@@ -7,14 +7,7 @@ const {
     ObjectId
 } = require('bson');
 const moment=require('moment')
-
 const objId = require('mongodb').ObjectId
-const client = require('twilio')(config.accountSID, config.authToken)
-const bcrypt = require('bcrypt')
-const changeProductQuantity = require('../USER-CONTROLLER/placeOrder');
-const { order } = require('paypal-rest-sdk');
-const { response } = require('../../app');
-const { getAllOrders } = require('../../helpers/user-helpers');
 
 
 
