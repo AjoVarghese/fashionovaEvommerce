@@ -12,6 +12,7 @@ let couponTotal = 0
 let couponData
 const total = require('../USER-CONTROLLER/cartController');
 const { userSignup_get } = require('./user-signup');
+const { getTotalPrice } = require('../../helpers/user-helpers');
 
 
 exports.applyCoupon_post = async (req, res) => {
@@ -19,8 +20,10 @@ exports.applyCoupon_post = async (req, res) => {
     if (req.session.user) {
         couponData = req.body
         exports.couponCode = couponData
-
-        getCoupon(couponData, req.session.user._id).then(async (response) => {
+        let price=await getPrice(req.session.user._id)
+        console.log("GET PRICE");
+        console.log(price);
+        getCoupon(couponData, req.session.user._id,price).then(async (response) => {
             res.json(response)
         })
     } else {
@@ -36,7 +39,7 @@ exports.applyCoupon_post = async (req, res) => {
 
 
 
-function getCoupon(data, userId) {
+function getCoupon(data, userId,price) {
     let date_obj = new Date();
         try{
     return new Promise(async (resolve, reject) => {
@@ -50,17 +53,16 @@ function getCoupon(data, userId) {
             if (coupon && coupon.couponQuantity > 0 && date_obj <= new Date(coupon.endingDate)) {
                
                 
-                if (total.totalPrice >= coupon.minPrice) {
-
-                    couponTotal = parseInt(total.totalPrice) - parseInt(coupon.couponAmount)
+                if (parseInt(price) >= parseInt(coupon.minPrice)) {
+                    couponTotal = parseInt(price) - parseInt(coupon.couponAmount)
                     exports.cartAmount = couponTotal
                     resolve({
                         couponApplied: true,
                         couponTotal
                     })
-                } else {
+                } else if(price < coupon.minPrice){
                     resolve({
-                        couponApplied: true
+                        invalidCoupon: true
                     })
                 }    
             
@@ -83,21 +85,72 @@ function getCoupon(data, userId) {
         }
 }
 
+function getPrice(userId){
+    return new Promise(async (resolve, reject) => {
+        var totalPrice = await db.get().collection(collection.CART_COLLECTION).aggregate([{
+                $match: {
+                    userId: objId(userId)
+                }
+            },
+            {
+                $unwind: '$products'
+            },
+            {
+                $project: {
+                    item: '$products.item',
+                    quantity: '$products.quantity'
+                }
+            },
+            {
+                $lookup: {
+                    from: collection.PRODUCT_COLLECTION,
+                    localField: 'item',
+                    foreignField: '_id',
+                    as: 'products'
+                }
+            },
+            {
+                $project: {
+                    item: 1,
+                    quantity: 1,
+                    products: {
+                        $arrayElemAt: ['$products', 0]
+                    }
+                }
+            },
+        ]).toArray()
+        
+         let total=0
 
+        for(var i=0;i<totalPrice.length;i++){
+            if(totalPrice[i].price == totalPrice[i].products.offerPrice && totalPrice[i].products.categoryOfferPrice == NaN || totalPrice[i].products.categoryOfferPrice ==0 || totalPrice[i].products.categoryOfferPrice == undefined ){
+
+                total=parseInt(total) + (parseInt(totalPrice[i].products.price) * parseInt(totalPrice[i].quantity))
+
+            }else if(totalPrice[i].products.offerPrice < totalPrice[i].products.price && totalPrice[i].products.categoryOfferPrice == undefined || totalPrice[i].products.categoryOfferPrice == null || totalPrice[i].products.categoryOfferPrice == 0){
+
+                total=parseInt(total) + (parseInt(totalPrice[i].products.offerPrice) * parseInt(totalPrice[i].quantity))
+
+            }else if(totalPrice[i].products.offerPrice > totalPrice[i].products.categoryOfferPrice && totalPrice[i].products.offerPrice != totalPrice[i].products.price){
+
+                total=parseInt(total) + (parseInt(totalPrice[i].products.categoryOfferPrice) * parseInt(totalPrice[i].quantity))
+            } else{
+
+                total=parseInt(total) + (parseInt(totalPrice[i].products.offerPrice) * parseInt(totalPrice[i].quantity))
+            }
+            }
+            exports.totalPrice=total
+            resolve(total)
+            
+    })
+}
 
 function checkUser(userId,coupon){
     return new Promise((resolve,reject)=>{
         db.get().collection(collection.COUPON_COLLECTION).findOne({couponCode:coupon.couponCode,'users.userId':objId(userId)}).then((data)=>{
-            console.log("USERS");
-            console.log(data);
             resolve(data)
         })
     })
 }
 
 
-// function deleteCoupon(code){
-//     return new Promise((resolve,reject)=>{
-//         db.get().collection(collection.COUPON_COLLECTION).deleteOne({couponCode:code})
-//     })
-// }
