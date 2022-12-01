@@ -345,10 +345,10 @@
                   method: 'post',
                   data: $('#category-offer').serialize(),
                   success: (response) => {
-                    if (response.status) {
+                    if (response.status == true) {
                       alert('offer already exists for the category')
                       window.location.href = "http://fashionova.website/category-offer"
-                    } else {
+                    } else if(response.status == false) {
                       window.location.href = "http://fashionova.website/category-offer"
                     }
                   }
