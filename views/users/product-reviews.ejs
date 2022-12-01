@@ -117,7 +117,7 @@
    <div class="container mt-5">
     <div class="row">
         <div class="col-md-12 m-auto" style="height:7em;border-style: solid;border-width: 1px;">
-            <img src="data:Image/<%=product.productimage1.contentType%>;base64,<%=product.productimage1.data.toString('base64')%>" alt="ssssd" class="float-right pt-3" style="height:6em;width:5em">
+            <img src="<%= product.image1 %>" alt="ssssd" class="float-right pt-3" style="height:6em;width:5em">
             <h5 class="pt-3"><%= product.productname %></h5>
             <p><%= product.description %></p>
         </div>
