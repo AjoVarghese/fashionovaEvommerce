@@ -30,7 +30,11 @@ exports.admin_addCategory_get=(req,res)=>{
 exports.admin_addCategory_post=(req,res)=>{
     try{
     addCategory(req.body).then((data)=>{
+        if(data == true){
         res.redirect('/view-category')
+        }else{
+            res.redirect('/add-category')
+        }
     })
 }catch{
     res.redirect('/404')
@@ -40,10 +44,15 @@ exports.admin_addCategory_post=(req,res)=>{
 
 
 function addCategory(category){
-    return new Promise((resolve,reject)=>{
-        db.get().collection(collection.CATEGORY_COLLECTION).insertOne(category).then((data)=>{
-            resolve(data)
-        })
+    return new Promise(async(resolve,reject)=>{
+        let categoryExist=await db.get().collection(collection.CATEGORY_COLLECTION).findOne({categoryname:category.categoryname})
+        if(!categoryExist){
+        db.get().collection(collection.CATEGORY_COLLECTION).insertOne(category)
+            resolve({data:true})
+        
+    }else{
+        resolve({exist:true})
+    }
     })
 }
 

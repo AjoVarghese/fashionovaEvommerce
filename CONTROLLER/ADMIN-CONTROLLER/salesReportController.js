@@ -37,6 +37,11 @@ function getOrders(){
             }
         },{
             $unwind:'$users'
+        },
+        {
+            $sort:{
+                _id:-1
+            }
         }
         ]).toArray()
             resolve(orders)

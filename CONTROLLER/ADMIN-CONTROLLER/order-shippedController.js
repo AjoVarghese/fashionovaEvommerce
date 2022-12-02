@@ -23,7 +23,7 @@ function shipOrder(id){
           {
             $set:{status:'Shipped'}
           }
-        ).then((response))
+        )
         resolve({shipOrder:true})
     })
 }

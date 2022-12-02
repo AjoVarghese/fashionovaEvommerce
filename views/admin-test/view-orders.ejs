@@ -574,13 +574,13 @@
               
                 
               <div class="card-bottom">
-                <% if(orders[i].status != 'Cancelled' || orders[i].status != 'Deliverd'){ %>
+                <% if(orders[i].status != 'cancelled' && orders[i].status != 'Deliverd'){ %>
                 <button onclick="cancelOrder('<%=orders[i]._id %>','<%= orders[i].userId %>')">❌ CANCEL ORDER</button>
                 <% } %>
-                <% if(orders[i].status !='Shipped' && orders[i].status != 'Cancelled' && orders[i].status != 'Deliverd'){ %>
+                <% if(orders[i].status !='Shipped' && orders[i].status != 'cancelled' && orders[i].status != 'Deliverd'){ %>
                 <button onclick="shipOrder('<%=orders[i]._id %>')">🚛 SHIPPED</button>
                 <% } %>
-                <% if(orders[i].status !='Deliverd' && orders[i].status != 'Cancelled'){ %>
+                <% if(orders[i].status !='Deliverd' && orders[i].status != 'cancelled'){ %>
                 <button onclick="delivered('<%=orders[i]._id %>')">🤝 DELIVERED</button>
                 <% } %>
                 

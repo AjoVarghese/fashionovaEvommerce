@@ -22,7 +22,7 @@ exports.viewReview_get=async(req,res)=>{
 
 function getReviews(){
     return new Promise(async(resolve,reject)=>{
-        let reviews=await db.get().collection(collection.REVIEW_COLLECTION).find().toArray()
+        let reviews=await db.get().collection(collection.REVIEW_COLLECTION).find().sort({_id:-1}).toArray()
             resolve(reviews)
         
     })

@@ -23,7 +23,7 @@ exports.admin_users_get=(req,res)=>{
 
 function getAllUsers(){
     return new Promise(async(resolve,reject)=>{
-        let users=await db.get().collection(collection.USER_COLLECTION).find().toArray()
+        let users=await db.get().collection(collection.USER_COLLECTION).find().sort({_id:-1}).toArray()
         resolve(users)
     })
 }
