@@ -66,8 +66,7 @@ function addReviews(details, userId,product) {
             let productReview = {
                 productId: product._id,
                 productName: product.productname,
-                productImage: product.
-                productimage1,
+                productImage: product.image1,
                 reviews: [reviewObj]
             }
 

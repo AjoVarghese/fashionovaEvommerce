@@ -21,8 +21,6 @@ exports.applyCoupon_post = async (req, res) => {
         couponData = req.body
         exports.couponCode = couponData
         let price=await getPrice(req.session.user._id)
-        console.log("GET PRICE");
-        console.log(price);
         getCoupon(couponData, req.session.user._id,price).then(async (response) => {
             res.json(response)
         })
@@ -50,7 +48,7 @@ function getCoupon(data, userId,price) {
         let user = await checkUser(userId, data)
         if(user==null){
        
-            if (coupon && coupon.couponQuantity > 0 && date_obj <= new Date(coupon.endingDate)) {
+            if (coupon && coupon.couponQuantity >=1 && date_obj <= new Date(coupon.endingDate)) {
                
                 
                 if (parseInt(price) >= parseInt(coupon.minPrice)) {
