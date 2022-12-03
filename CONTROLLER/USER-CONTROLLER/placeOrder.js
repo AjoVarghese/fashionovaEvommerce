@@ -46,7 +46,6 @@ exports.placeOrder_post = async (req, res) => {
             } else if (couponTotal != 0) {
                 purchaseAmount = couponTotal
             }
-
             await placeOrder(req.body, products, cartQuantity, purchaseAmount, req.session.user._id, cart)
 
             if (req.body.paymentMethod === 'Paypal') {
@@ -70,11 +69,9 @@ exports.placeOrder_post = async (req, res) => {
                 if(wallet.walletAmount > 0 &&wallet.walletAmount >= total.totalPrice ){
                    db.get().collection(collection.WALLET_COLLECTION).updateOne({userId:objId(req.session.user._id)},
                      {
-                        
                             $inc:{
                                 walletAmount:-total.totalPrice
                             }
-                        
                      }
                    )
                 console.log('Wallet');
@@ -198,7 +195,7 @@ function placeOrder(address, products, cartQuantity, totalPrice, userId, cart) {
             totalAmount: total,
             paymentMethod: address['paymentMethod'],
             status: status,
-            date: moment().format('L'),
+            date: moment().format(),
             time: moment().format('MMMM Do YYYY, h:mm:ss a')
         }
    

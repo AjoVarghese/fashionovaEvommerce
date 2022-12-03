@@ -39,7 +39,7 @@ function getAllOrders(limit,page,startIndex,endIndex){
    
     return new Promise(async(resolve,reject)=>{
         let count12 =  await db.get().collection(collection.ORDER_COLLECTION).count({})
-        let orders = await db.get().collection(collection.ORDER_COLLECTION).find({}).sort({_id:-1}).limit(limit).skip((page - 1) * parseInt(limit)).toArray()
+        let orders = await db.get().collection(collection.ORDER_COLLECTION).find({}).sort({date:-1}).limit(limit).skip((page - 1) * parseInt(limit)).toArray()
         resolve(orders,count12)
     })
 }
