@@ -27,6 +27,10 @@ let week = moment().subtract(7, 'days').calendar()
 let month = moment().subtract(30, 'days').calendar()
 let year=moment().subtract(365,'days').calendar()
 
+console.log('SSSSSSS');
+console.log(week);
+console.log(month);
+console.log(year);
 
 exports.admin_home_get = async (req, res) => {
     try{

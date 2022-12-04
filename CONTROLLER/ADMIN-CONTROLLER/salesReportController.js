@@ -44,6 +44,8 @@ function getOrders(){
             }
         }
         ]).toArray()
+          console.log("SALES REPORT");
+          console.log(orders);
             resolve(orders)
       
     })
