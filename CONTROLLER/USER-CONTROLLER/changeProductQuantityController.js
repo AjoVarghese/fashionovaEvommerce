@@ -6,7 +6,6 @@ const config=require('../../config/config');
 const { ObjectId } = require('bson');
 const objId=require('mongodb').ObjectId
 
-
 exports.chanageProductQuantity_post=(req,res)=>{
     try{
     changeProductQuantity(req.body).then((response)=>{

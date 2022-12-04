@@ -46,7 +46,7 @@ function addReviews(details, userId,product) {
         title:details.title,
         reviewDescription: details.description,
         date: moment().format('L'),
-        time: moment().format('LTS')
+        time:moment().format()
     }
     return new Promise(async (resolve, reject) => {
         let reviewExists = await checkProductReview(details.productId)

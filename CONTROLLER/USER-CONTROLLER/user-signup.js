@@ -32,7 +32,6 @@ exports.userSignup_get=(req,res)=>{
 
 exports.userSignup_post=async(req,res)=>{
   try{
-    console.log(req.body.email);
   let getEmail=await db.get().collection(collection.USER_COLLECTION).findOne({email:req.body.email})
   let mobile=await db.get().collection(collection.USER_COLLECTION).findOne({mobile:req.body.mobile})
   if(getEmail){
@@ -55,7 +54,7 @@ exports.userSignup_post=async(req,res)=>{
 }
 
 function doSignup(userData){
-        userData.date=moment().format('L')
+        userData.date=moment().format()
            userData.signupStatus=true
     return new Promise(async(resolve,reject)=>{
         userData.password=await bcrypt.hash(userData.password,10)

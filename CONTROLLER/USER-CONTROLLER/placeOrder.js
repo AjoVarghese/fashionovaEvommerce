@@ -195,8 +195,8 @@ function placeOrder(address, products, cartQuantity, totalPrice, userId, cart) {
             totalAmount: total,
             paymentMethod: address['paymentMethod'],
             status: status,
-            date: moment().format(),
-            time: moment().format('MMMM Do YYYY, h:mm:ss a')
+            date: moment().format('L'),
+            time: moment().format()
         }
    
         db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((data) => {

@@ -29,7 +29,7 @@ function viewProductReview(id){
             {
                 _id:objId(id)
             }
-        ).sort({_id:-1}).toArray()
+        ).sort({time:-1}).toArray()
         resolve(productReview)
     })
 }

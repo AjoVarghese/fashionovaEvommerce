@@ -35,7 +35,7 @@ exports.admin_Coupons_post = async (req, res) => {
         couponQuantity:parseInt(req.body.couponQuantity),
         startingDate:req.body.startingDate,
         endingDate:req.body.endingDate,
-        date:moment().format('MMMM Do YYYY, h:mm:ss a')
+        date:moment().format()
     }
      coupon.addCoupon(details).then((response)=>{
        
