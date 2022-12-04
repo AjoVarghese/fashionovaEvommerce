@@ -77,7 +77,7 @@ return new Promise(async(resolve,reject)=>{
         $match:{userId:objId(userId)}
     }, 
     {
-        $sort:{_id:-1}
+        $sort:{date:-1}
     }
    ]).toArray()
     resolve(orders)

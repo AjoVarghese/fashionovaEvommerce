@@ -144,7 +144,6 @@ function getTotalRevenue() {
 }
 
 
-
 function getTotalUsers() {
     return new Promise(async (resolve, reject) => {
         let totalUsers = await db.get().collection(collection.USER_COLLECTION).find().count()
@@ -200,6 +199,7 @@ function getAllRazorPay(){
     })
 }
 
+
 function getAllPaypal(){
     return new Promise(async(resolve,reject)=>{
         let payPal=await db.get().collection(collection.ORDER_COLLECTION).find({
@@ -208,6 +208,7 @@ function getAllPaypal(){
         resolve(payPal)
     })
 }
+
 
 
 function getWeeklyRazorPay(week){
@@ -226,6 +227,7 @@ function getWeeklyRazorPay(week){
     resolve(weeklyRazorPay)
    })
 }
+
 
 function getMOnthlyRazorPay(month){
     return new Promise(async(resolve,reject)=>{

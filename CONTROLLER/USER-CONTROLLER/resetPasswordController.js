@@ -34,14 +34,15 @@ exports.resetPassword_post=(req,res)=>{
 
 function updatePassword(data,userId){
     return new Promise(async(resolve,reject)=>{
-        data.password=await bcrypt.hash(data.password,10)
+        data.bcryptpPassword=await bcrypt.hash(data.password,10)
         db.get().collection(collection.USER_COLLECTION).updateOne(
             {
                 _id:userId
             },
             {
                 $set:{
-                   password:data.password
+                   password:data.bcryptpPassword,
+                   cpassword:data.cpassword
                 }
             }
             ).then((data)=>{
