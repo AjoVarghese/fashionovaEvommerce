@@ -48,8 +48,8 @@ exports.paypal_post = (req, res) => {
         "payment_method": "paypal"
       },
       "redirect_urls": {
-        "return_url": "https://fashionova.website/paypal-success",
-        "cancel_url": "https://fashionova.website/paypal-cancel"
+        "return_url": "https://localhost:3000/paypal-success",
+        "cancel_url": "https://localhost:3000/paypal-cancel"
       },
       "transactions": [{
         "item_list": {

@@ -271,7 +271,7 @@
       							'success',
     						)
                                 setTimeout(()=>{
-                                    window.location.href="http://fashionova.website/my-orders"
+                                    window.location.href="http://localhost:3000/my-orders"
 									},1500)
 								}else if(response.noWallet){
 									Swal.fire({
@@ -282,9 +282,9 @@
 											})
 								}
 								else if(response.paypal){
-									window.location.href="http://fashionova.website/paypal-payment"
+									window.location.href="http://localhost:3000/paypal-payment"
 								}else if(response.razorPay){
-									window.location.href="http://fashionova.website/razorPay-payment"
+									window.location.href="http://localhost:3000/razorPay-payment"
 								}
 							}else{
 								Swal.fire({
